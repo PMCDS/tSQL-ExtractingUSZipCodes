@@ -30,7 +30,7 @@
 **
 *********************************************************************************/
 
-ALTER FUNCTION udfGetZipCodeFromString(@rec INT, @maxRec INT, @offset INT, @addressString nVARCHAR(max))
+CREATE FUNCTION udfGetZipCodeFromString(@rec INT, @maxRec INT, @offset INT, @addressString nVARCHAR(max))
 RETURNS VARCHAR(8)  
 WITH EXECUTE AS CALLER  
 AS  
