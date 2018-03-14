@@ -41,15 +41,15 @@ BEGIN
 
     -- Filter on valid Zip nums & valid Zip aplha-codes.
     -- Mutual check for both formts 'CA 90405' and 'CA90405'
-    IF ISNULL(TRY_CAST(SUBSTRING(@addressString, PATINDEX('%[0-9][0-9][0-9][0-9][0-9]%', @addressString),2) AS INT), 100) < 100 
-	   AND SUBSTRING(@addressString, PATINDEX('%[a-zA-Z][a-zA-Z][0-9][0-9][0-9][0-9][0-9]%', @addressString),2) IN(
+    IF ISNULL(TRY_CAST(SUBSTRING(@addressStringTr, PATINDEX('%[0-9][0-9][0-9][0-9][0-9]%', @addressStringTr),2) AS INT), 100) < 100 
+	   AND SUBSTRING(@addressStringTr, PATINDEX('%[a-zA-Z][a-zA-Z][0-9][0-9][0-9][0-9][0-9]%', @addressStringTr),2) IN(
 	   'AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME',
 	   'MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI',
 	   'SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','AS','GU','MP','PR','UM','VI','AA','AP','AE')
     BEGIN
-	  SELECT @zip = IIF(PATINDEX('%[a-zA-Z][a-zA-Z][0-9][0-9][0-9][0-9][0-9]%', @addressString) > 0, 
-					   STUFF(SUBSTRING(@addressString, PATINDEX('%[a-zA-Z][a-zA-Z][0-9][0-9][0-9][0-9][0-9]%', 
-					   @addressString), 7), 3, 0, ' '), 'n/a');
+	  SELECT @zip = IIF(PATINDEX('%[a-zA-Z][a-zA-Z][0-9][0-9][0-9][0-9][0-9]%', @addressStringTr) > 0, 
+					   STUFF(SUBSTRING(@addressStringTr, PATINDEX('%[a-zA-Z][a-zA-Z][0-9][0-9][0-9][0-9][0-9]%', 
+					   @addressStringTr), 7), 3, 0, ' '), 'n/a');
     END
     ELSE
     BEGIN
